@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>BAQI</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <h1 class="text-center" style="margin-top: 75px;
+            margin-left: 50px;
+            margin-right: 50px;
+            margin-bottom: 50px;
+            color:rgb(82, 150, 209);
+            font:bolder;
+            font-family: verdana;
+            width: 1200px;">AIR POLLUTION PREDICTION USING SATELLITE IMAGES</h1>
+        </div>
+        <div class="row">
+                <div class="col-lg-6">
+                    <h2 class="" 
+                    style="color:rgb(82, 150, 209);
+                    font:bolder;
+                    font-family: verdana;
+                    margin-bottom: 20px;">Upload the Image to know the Air Pollution levels!!</h2>
+                    <!-- <form method="post" action="/" enctype="multipart/form-data">
+                        <dl>
+                            <p>
+                                <input type="file" name="file" class="form-control" autocomplete="off" required>
+                            </p>
+                        </dl>
+                        <p>
+                            <input type="submit" value="Submit" class="btn btn-success">
+                        </p>
+                    </form> -->
+                    <form method="post" action="/" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <div class="custom-file">
+                                <input type="file" name="file" class="custom-file-input" id="fileInput" required>
+                                <label class="custom-file-label" for="fileInput">Select file</label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </form>  
+                    <script>
+                        document.getElementById('fileInput').addEventListener('change', function() {
+                            var fileName = this.files[0].name;
+                            var label = document.querySelector('.custom-file-label');
+                            label.textContent = fileName;
+                        });
+                    </script>                  
+                </div>
+                <div class="col-lg-6">
+                    {% if filename %}
+                    <div class="row">
+                        <img alt="{{ predictions.class }} image"src="{{ url_for('display_image', filename=filename) }}" class="img-fluid" style="width: 300px; height: 300px; margin-left: 130px; margin-top: 20px;"/>
+                    </div>
+                    {% endif %}
+
+                    {% if predictions %}
+                    <p class="text-center"
+                    style = 
+                    "margin-top: 10px;
+                    margin-left: 10px;
+                    font:bolder;
+                    font-family: verdana;" >It's Most Probable that the area lies under {{ predictions.class }} region, which has been predicted with Confidence: {{"%.2f"|format(predictions.confidence*100)}}%</p>
+                    {% endif %}
+                </div>
+        </div>
+
+        <!-- <p>
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                    <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% endwith %}
+            </p> -->
+    </div>
+    </div>
+    </div>
+</body>
+</html>
+
